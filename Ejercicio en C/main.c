@@ -28,7 +28,7 @@ void registrarAsistencia(struct Estudiante* estudiante, const char* fecha, const
 void mostrarAsistencias(struct Estudiante estudiante);
 
 int main() {
-    struct Estudiante estudiante1 = {"Rodrigo", 18, 9.5, {"Matematicas", "Programación", "Historia"}, 3, {}, 0};
+    struct Estudiante estudiante1 = {"Rodrigo", 18, 9.5, {"Matematicas", "Programacion", "Historia"}, 3, {}, 0};
 
     mostrarEstudiante(estudiante1);
 
