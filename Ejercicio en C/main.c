@@ -21,47 +21,14 @@ struct Estudiante {
     int numAsistencias;
 };
 
-void mostrarEstudiante(struct Estudiante estudiante);
-void agregarMateria(struct Estudiante* estudiante, const char* materia);
-void eliminarMateria(struct Estudiante* estudiante, const char* materia);
-void registrarAsistencia(struct Estudiante* estudiante, const char* fecha, const char* materia, const char* estado);
-void mostrarAsistencias(struct Estudiante estudiante);
-
-int main() {
-    struct Estudiante estudiante1 = {"Rodrigo", 18, 9.5, {"Matematicas", "Programacion", "Historia"}, 3, {}, 0};
-
-    mostrarEstudiante(estudiante1);
-
-    agregarMateria(&estudiante1, "Fisica");
-
-    mostrarEstudiante(estudiante1);
-
-    registrarAsistencia(&estudiante1, "2023-12-17", "Matematicas", "asistió");
-
-    mostrarAsistencias(estudiante1);
-
-    return 0;
-}
-
-void mostrarEstudiante(struct Estudiante estudiante) {
-    printf("Nombre: %s\n", estudiante.nombre);
-    printf("Edad: %d\n", estudiante.edad);
-    printf("Promedio: %.2f\n", estudiante.promedio);
-
-    printf("Materias inscritas:\n");
-    for (int i = 0; i < estudiante.numMaterias; i++) {
-        printf("- %s\n", estudiante.materias[i]);
-    }
-
-    printf("\n");
-}
-
-void agregarMateria(struct Estudiante* estudiante, const char* materia) {
+// Retorno de códigos de error
+int agregarMateria(struct Estudiante* estudiante, const char* materia) {
     if (estudiante->numMaterias < MAX_MATERIAS) {
         strcpy(estudiante->materias[estudiante->numMaterias], materia);
         estudiante->numMaterias++;
+        return 0; // Éxito
     } else {
-        printf("No se pueden agregar más materias.\n");
+        return -1;
     }
 }
 
@@ -79,17 +46,62 @@ void eliminarMateria(struct Estudiante* estudiante, const char* materia) {
     printf("La materia no está inscrita.\n");
 }
 
-void registrarAsistencia(struct Estudiante* estudiante, const char* fecha, const char* materia, const char* estado) {
-    if (estudiante->numAsistencias < MAX_ASISTENCIAS) {
-        struct Asistencia nuevaAsistencia;
-        strcpy(nuevaAsistencia.fecha, fecha);
-        strcpy(nuevaAsistencia.materia, materia);
-        strcpy(nuevaAsistencia.estado, estado);
-        estudiante->asistencias[estudiante->numAsistencias] = nuevaAsistencia;
-        estudiante->numAsistencias++;
+// Punteros nulos
+struct Estudiante* crearEstudiante(const char* nombre, int edad, float promedio) {
+    struct Estudiante* estudiante = malloc(sizeof(struct Estudiante));
+    if (estudiante != NULL) {
+        strcpy(estudiante->nombre, nombre);
+        estudiante->edad = edad;
+        estudiante->promedio = promedio;
+        estudiante->numMaterias = 0;
+        estudiante->numAsistencias = 0;
+        return estudiante;
     } else {
-        printf("No se pueden registrar más asistencias.\n");
+        return NULL;
     }
+}
+
+void destruirEstudiante(struct Estudiante* estudiante) {
+    free(estudiante);
+}
+
+void mostrarAsistencias(struct Estudiante estudiante);
+
+int main() {
+    struct Estudiante* estudiante1 = crearEstudiante("Rodrigo", 18, 9.5);
+    if (estudiante1 != NULL) {
+        mostrarEstudiante(*estudiante1);
+
+        if (agregarMateria(estudiante1, "Física") == 0) {
+            mostrarEstudiante(*estudiante1);
+
+            eliminarMateria(estudiante1, "Historia");
+
+            mostrarEstudiante(*estudiante1);
+
+            // Liberar memoria
+            destruirEstudiante(estudiante1);
+        } else {
+            printf("Error: no se pudo agregar la materia.\n");
+        }
+    } else {
+        printf("Error: no se pudo crear el estudiante.\n");
+    }
+
+    return 0;
+}
+
+void mostrarEstudiante(struct Estudiante estudiante) {
+    printf("Nombre: %s\n", estudiante.nombre);
+    printf("Edad: %d\n", estudiante.edad);
+    printf("Promedio: %.2f\n", estudiante.promedio);
+
+    printf("Materias inscritas:\n");
+    for (int i = 0; i < estudiante.numMaterias; i++) {
+        printf("- %s\n", estudiante.materias[i]);
+    }
+
+    printf("\n");
 }
 
 void mostrarAsistencias(struct Estudiante estudiante) {
