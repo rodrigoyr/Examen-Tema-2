@@ -70,7 +70,7 @@ void mostrarEstudiante(struct Estudiante estudiante) {
     printf("Edad: %d\n", estudiante.edad);
     printf("Promedio: %.2f\n", estudiante.promedio);
 
-    printf("Materias inscritas:\n");
+    printf("\nMaterias inscritas:\n");
     for (int i = 0; i < estudiante.numMaterias; i++) {
         printf("- %s\n", estudiante.materias[i]);
     }
@@ -85,18 +85,22 @@ void mostrarEstudiante(struct Estudiante estudiante) {
 int main() {
     struct Estudiante* estudiante1 = crearEstudiante("Rodrigo", 18, 9.5);
     if (estudiante1 != NULL) {
+        // Simulación de una asistencia
+        strcpy(estudiante1->asistencias[estudiante1->numAsistencias].fecha, "2023-12-14");
+        strcpy(estudiante1->asistencias[estudiante1->numAsistencias].materia, "Fisica");
+        strcpy(estudiante1->asistencias[estudiante1->numAsistencias].estado, "asistió");
+        estudiante1->numAsistencias++;
+
         mostrarEstudiante(*estudiante1);
 
         if (agregarMateria(estudiante1, "Fisica") == 0) {
             mostrarEstudiante(*estudiante1);
 
-            strcpy(estudiante1->asistencias[estudiante1->numAsistencias].fecha, "2023-12-20");
-            strcpy(estudiante1->asistencias[estudiante1->numAsistencias].materia, "Física");
-            strcpy(estudiante1->asistencias[estudiante1->numAsistencias].estado, "asistió");
-            estudiante1->numAsistencias++;
+            eliminarMateria(estudiante1, "Historia");
 
             mostrarEstudiante(*estudiante1);
 
+            // Liberar memoria
             destruirEstudiante(estudiante1);
         } else {
             printf("Error: no se pudo agregar la materia.\n");
