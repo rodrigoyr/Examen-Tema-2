@@ -74,4 +74,41 @@ void registrarAsistencia(Estudiante& estudiante, const string& fecha, const stri
         asistencia.estado = estado;
         estudiante.asistencias.push_back(asistencia);
     } else {
-        throw
+        throw AsistenciaDuplicadaException();
+    }
+}
+
+int main() {
+    Estudiante estudiante1;
+
+    try {
+        estudiante1.nombre = "Juan Perez";
+        estudiante1.edad = 20;
+        estudiante1.promedio = 8.5;
+
+        agregarMateria(estudiante1, "Latin");
+        agregarMateria(estudiante1, "Programacion");
+        agregarMateria(estudiante1, "Historia");
+
+        mostrarEstudiante(estudiante1);
+
+        try {
+            eliminarMateria(estudiante1, "Biologia");
+        } catch (const MateriaNoEncontradaException& e) {
+            cerr << "Error: " << e.what() << endl;
+        }
+
+        try {
+            registrarAsistencia(estudiante1, "2023-12-17", "Historia", "asistio");
+        } catch (const AsistenciaDuplicadaException& e) {
+            cerr << "Error: " << e.what() << endl;
+        }
+
+        mostrarEstudiante(estudiante1);
+
+    } catch (const exception& e) {
+        cerr << "Error general: " << e.what() << endl;
+    }
+
+    return 0;
+}
