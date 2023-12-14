@@ -72,7 +72,7 @@ int main() {
     if (estudiante1 != NULL) {
         mostrarEstudiante(*estudiante1);
 
-        if (agregarMateria(estudiante1, "Física") == 0) {
+        if (agregarMateria(estudiante1, "Fisica") == 0) {
             mostrarEstudiante(*estudiante1);
 
             eliminarMateria(estudiante1, "Historia");
