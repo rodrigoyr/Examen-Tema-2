@@ -1,0 +1,3 @@
+C:/Ingeniería Informática UAX/2023-24/1er cuatrimestre/Programación/Ejercicios/Examen-Tema-2/Ejercicio en C/cmake-build-debug/CMakeFiles/Ejercicio_en_C.dir
+C:/Ingeniería Informática UAX/2023-24/1er cuatrimestre/Programación/Ejercicios/Examen-Tema-2/Ejercicio en C/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Ingeniería Informática UAX/2023-24/1er cuatrimestre/Programación/Ejercicios/Examen-Tema-2/Ejercicio en C/cmake-build-debug/CMakeFiles/rebuild_cache.dir
