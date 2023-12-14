@@ -44,7 +44,7 @@ void eliminarMateria(struct Estudiante* estudiante, const char* materia) {
         }
     }
 
-    printf("La materia no está inscrita.\n");
+    printf("La materia no esta inscrita.\n");
 }
 
 struct Estudiante* crearEstudiante(const char* nombre, int edad, float promedio) {
@@ -75,11 +75,7 @@ void mostrarEstudiante(struct Estudiante estudiante) {
         printf("- %s\n", estudiante.materias[i]);
     }
 
-    printf("\n");
-}
-
-void mostrarAsistencias(struct Estudiante estudiante) {
-    printf("Asistencias registradas:\n");
+    printf("\nAsistencias registradas:\n");
     for (int i = 0; i < estudiante.numAsistencias; i++) {
         printf("Fecha: %s, Materia: %s, Estado: %s\n", estudiante.asistencias[i].fecha,
                estudiante.asistencias[i].materia, estudiante.asistencias[i].estado);
@@ -94,11 +90,13 @@ int main() {
         if (agregarMateria(estudiante1, "Fisica") == 0) {
             mostrarEstudiante(*estudiante1);
 
-            eliminarMateria(estudiante1, "Historia");
+            strcpy(estudiante1->asistencias[estudiante1->numAsistencias].fecha, "2023-12-20");
+            strcpy(estudiante1->asistencias[estudiante1->numAsistencias].materia, "Física");
+            strcpy(estudiante1->asistencias[estudiante1->numAsistencias].estado, "asistió");
+            estudiante1->numAsistencias++;
 
             mostrarEstudiante(*estudiante1);
 
-            // Liberar memoria
             destruirEstudiante(estudiante1);
         } else {
             printf("Error: no se pudo agregar la materia.\n");
