@@ -3,6 +3,13 @@
 #include <string.h>
 
 #define MAX_MATERIAS 10
+#define MAX_ASISTENCIAS 50
+
+struct Asistencia {
+    char fecha[20];
+    char materia[50];
+    char estado[10]; // "asistio", "falta", "tardanza"
+};
 
 struct Estudiante {
     char nombre[50];
@@ -10,22 +17,29 @@ struct Estudiante {
     float promedio;
     char materias[MAX_MATERIAS][50];
     int numMaterias;
+    struct Asistencia asistencias[MAX_ASISTENCIAS];
+    int numAsistencias;
 };
 
+// Declaración de funciones
 void mostrarEstudiante(struct Estudiante estudiante);
 void agregarMateria(struct Estudiante* estudiante, const char* materia);
 void eliminarMateria(struct Estudiante* estudiante, const char* materia);
+void registrarAsistencia(struct Estudiante* estudiante, const char* fecha, const char* materia, const char* estado);
+void mostrarAsistencias(struct Estudiante estudiante);
 
 int main() {
-    struct Estudiante estudiante1 = {"Rodrigo", 18, 9.5, {"Matematicas", "Programacion", "Historia"}, 3};
+    struct Estudiante estudiante1 = {"Rodrigo", 18, 9.5, {"Matematicas", "Programacion", "Historia"}, 3, {}, 0};
 
     mostrarEstudiante(estudiante1);
 
-    agregarMateria(&estudiante1, "Fisica y Quimica");
+    agregarMateria(&estudiante1, "Fisica");
+
     mostrarEstudiante(estudiante1);
 
-    eliminarMateria(&estudiante1, "Historia");
-    mostrarEstudiante(estudiante1);
+    registrarAsistencia(&estudiante1, "2023-12-17", "Matemáticas", "asistio");
+
+    mostrarAsistencias(estudiante1);
 
     return 0;
 }
@@ -48,14 +62,13 @@ void agregarMateria(struct Estudiante* estudiante, const char* materia) {
         strcpy(estudiante->materias[estudiante->numMaterias], materia);
         estudiante->numMaterias++;
     } else {
-        printf("No se pueden añadir mas materias.\n");
+        printf("No se pueden agregar más materias.\n");
     }
 }
 
 void eliminarMateria(struct Estudiante* estudiante, const char* materia) {
     for (int i = 0; i < estudiante->numMaterias; i++) {
         if (strcmp(estudiante->materias[i], materia) == 0) {
-            // Mover las materias restantes hacia atrás
             for (int j = i; j < estudiante->numMaterias - 1; j++) {
                 strcpy(estudiante->materias[j], estudiante->materias[j + 1]);
             }
@@ -66,3 +79,23 @@ void eliminarMateria(struct Estudiante* estudiante, const char* materia) {
 
     printf("La materia no está inscrita.\n");
 }
+
+// Implementación de la función registrarAsistencia
+void registrarAsistencia(struct Estudiante* estudiante, const char* fecha, const char* materia, const char* estado) {
+    if (estudiante->numAsistencias < MAX_ASISTENCIAS) {
+        struct Asistencia nuevaAsistencia;
+        strcpy(nuevaAsistencia.fecha, fecha);
+        strcpy(nuevaAsistencia.materia, materia);
+        strcpy(nuevaAsistencia.estado, estado);
+        estudiante->asistencias[estudiante->numAsistencias] = nuevaAsistencia;
+        estudiante->numAsistencias++;
+    } else {
+        printf("No se pueden agregar mas asistencias.\n");
+    }
+}
+
+void mostrarAsistencias(struct Estudiante estudiante) {
+    printf("Asistencias registradas:\n");
+    for (int i = 0; i < estudiante.numAsistencias; i++) {
+        printf("Fecha: %s, Materia: %s, Estado: %s\n", estudiante.asistencias[i].fecha,
+               estudiante
