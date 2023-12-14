@@ -1,26 +1,16 @@
 "C:\Programas\CLion 2023.2.2\bin\cmake\win\x64\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Programas/CLion 2023.2.2/bin/ninja/win/x64/ninja.exe" -G Ninja -S "C:\Ingeniería Informática UAX\2023-24\1er cuatrimestre\Programación\Ejercicios\Examen-Tema-2\Ejercicio" -B "C:\Ingeniería Informática UAX\2023-24\1er cuatrimestre\Programación\Ejercicios\Examen-Tema-2\Ejercicio\cmake-build-debug"
-CMake Error: Could not find cmake module file: CMakeDetermineenCompiler.cmake
-CMake Error: Could not find cmake module file: C:/Ingeniería Informática UAX/2023-24/1er cuatrimestre/Programación/Ejercicios/Examen-Tema-2/Ejercicio/cmake-build-debug/CMakeFiles/3.26.4/CMakeenCompiler.cmake
-CMake Error: Could not find cmake module file: CMakeDetermineC++Compiler.cmake
-CMake Error: Could not find cmake module file: C:/Ingeniería Informática UAX/2023-24/1er cuatrimestre/Programación/Ejercicios/Examen-Tema-2/Ejercicio/cmake-build-debug/CMakeFiles/3.26.4/CMakeC++Compiler.cmake
-CMake Error at CMakeLists.txt:2 (project):
-  No CMAKE_en_COMPILER could be found.
-
-  Tell CMake where to find the compiler by setting the CMake cache entry
-  CMAKE_en_COMPILER to the full path to the compiler, or to the compiler name
-  if it is in the PATH.
-
-
-CMake Error: Could not find cmake module file: CMakeenInformation.cmake
-CMake Error at CMakeLists.txt:2 (project):
-  No CMAKE_C++_COMPILER could be found.
-
-  Tell CMake where to find the compiler by setting the CMake cache entry
-  CMAKE_C++_COMPILER to the full path to the compiler, or to the compiler
-  name if it is in the PATH.
-
-
-CMake Error: Could not find cmake module file: CMakeC++Information.cmake
-CMake Error: CMAKE_en_COMPILER not set, after EnableLanguage
-CMake Error: CMAKE_C++_COMPILER not set, after EnableLanguage
--- Configuring incomplete, errors occurred!
+-- The C compiler identification is GNU 13.1.0
+-- The CXX compiler identification is GNU 13.1.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: C:/Programas/CLion 2023.2.2/bin/mingw/bin/gcc.exe - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: C:/Programas/CLion 2023.2.2/bin/mingw/bin/g++.exe - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Configuring done (4.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: C:/Ingeniería Informática UAX/2023-24/1er cuatrimestre/Programación/Ejercicios/Examen-Tema-2/Ejercicio/cmake-build-debug
