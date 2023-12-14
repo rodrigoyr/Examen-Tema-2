@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -8,7 +9,7 @@ struct Estudiante {
     string nombre;
     int edad;
     float promedio;
-    vector<string> materias; // Lista de materias
+    vector<string> materias;
 };
 
 void mostrarEstudiante(const Estudiante& estudiante) {
@@ -27,7 +28,9 @@ void agregarMateria(Estudiante& estudiante, const string& materia) {
 }
 
 void eliminarMateria(Estudiante& estudiante, const string& materia) {
-    estudiante.materias.erase(remove(estudiante.materias.begin(), estudiante.materias.end(), materia), estudiante.materias.end());
+    estudiante.materias.erase(remove_if(estudiante.materias.begin(), estudiante.materias.end(),
+                                        [&materia](const string& mat) { return mat == materia; }),
+                              estudiante.materias.end());
 }
 
 int main() {
