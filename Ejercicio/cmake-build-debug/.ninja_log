@@ -1,3 +1,7 @@
 # ninja log v5
-11	1519	7242555890022392	CMakeFiles/Ejercicio.dir/main.cpp.obj	8c7f13089865050a
+18	1230	7242558056567805	CMakeFiles/Ejercicio.dir/main.cpp.obj	8c7f13089865050a
+34	195	7242558046225243	CMakeFiles/Ejercicio.dir/main.c.obj	d9646eb3e932bda9
 1521	1847	7242555893233502	Ejercicio.exe	ed65df401575cc60
+2	410	7242559845092982	build.ninja	415c135d181ee888
+20	190	7242559891537183	CMakeFiles/Ejercicio.dir/main.c.obj	d81946545a35bab7
+9	1573	7242559905346928	CMakeFiles/Ejercicio.dir/main.cpp.obj	c8371ee8020aa45
