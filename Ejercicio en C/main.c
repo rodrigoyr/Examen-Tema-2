@@ -8,7 +8,7 @@
 struct Asistencia {
     char fecha[20];
     char materia[50];
-    char estado[10]; // "asistio", "falta", "tardanza"
+    char estado[10]; // "asistió", "falta", "tardanza"
 };
 
 struct Estudiante {
@@ -21,7 +21,6 @@ struct Estudiante {
     int numAsistencias;
 };
 
-// Declaración de funciones
 void mostrarEstudiante(struct Estudiante estudiante);
 void agregarMateria(struct Estudiante* estudiante, const char* materia);
 void eliminarMateria(struct Estudiante* estudiante, const char* materia);
@@ -29,7 +28,7 @@ void registrarAsistencia(struct Estudiante* estudiante, const char* fecha, const
 void mostrarAsistencias(struct Estudiante estudiante);
 
 int main() {
-    struct Estudiante estudiante1 = {"Rodrigo", 18, 9.5, {"Matematicas", "Programacion", "Historia"}, 3, {}, 0};
+    struct Estudiante estudiante1 = {"Rodrigo", 18, 9.5, {"Matematicas", "Programación", "Historia"}, 3, {}, 0};
 
     mostrarEstudiante(estudiante1);
 
@@ -37,7 +36,7 @@ int main() {
 
     mostrarEstudiante(estudiante1);
 
-    registrarAsistencia(&estudiante1, "2023-12-17", "Matemáticas", "asistio");
+    registrarAsistencia(&estudiante1, "2023-12-17", "Matematicas", "asistió");
 
     mostrarAsistencias(estudiante1);
 
@@ -80,7 +79,6 @@ void eliminarMateria(struct Estudiante* estudiante, const char* materia) {
     printf("La materia no está inscrita.\n");
 }
 
-// Implementación de la función registrarAsistencia
 void registrarAsistencia(struct Estudiante* estudiante, const char* fecha, const char* materia, const char* estado) {
     if (estudiante->numAsistencias < MAX_ASISTENCIAS) {
         struct Asistencia nuevaAsistencia;
@@ -90,7 +88,7 @@ void registrarAsistencia(struct Estudiante* estudiante, const char* fecha, const
         estudiante->asistencias[estudiante->numAsistencias] = nuevaAsistencia;
         estudiante->numAsistencias++;
     } else {
-        printf("No se pueden agregar mas asistencias.\n");
+        printf("No se pueden registrar más asistencias.\n");
     }
 }
 
@@ -98,4 +96,6 @@ void mostrarAsistencias(struct Estudiante estudiante) {
     printf("Asistencias registradas:\n");
     for (int i = 0; i < estudiante.numAsistencias; i++) {
         printf("Fecha: %s, Materia: %s, Estado: %s\n", estudiante.asistencias[i].fecha,
-               estudiante
+               estudiante.asistencias[i].materia, estudiante.asistencias[i].estado);
+    }
+}
