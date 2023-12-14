@@ -16,14 +16,14 @@ public:
 class AsistenciaDuplicadaException : public exception {
 public:
     const char* what() const throw() {
-        return "Error: Ya se registró asistencia para esta fecha y materia.";
+        return "Error: Ya se registro asistencia para estea dia y materia.";
     }
 };
 
 struct Asistencia {
     string fecha;
     string materia;
-    string estado; // "asistió", "falta", "tardanza"
+    string estado; // "asistio", "falta", "tardanza"
 };
 
 struct Estudiante {
@@ -82,9 +82,9 @@ int main() {
     Estudiante estudiante1;
 
     try {
-        estudiante1.nombre = "Juan Perez";
-        estudiante1.edad = 20;
-        estudiante1.promedio = 8.5;
+        estudiante1.nombre = "Rodrigo Yepes Rubio";
+        estudiante1.edad = 18;
+        estudiante1.promedio = 9.5;
 
         agregarMateria(estudiante1, "Latin");
         agregarMateria(estudiante1, "Programacion");
