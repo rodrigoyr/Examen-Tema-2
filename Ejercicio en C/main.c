@@ -44,7 +44,7 @@ void eliminarMateria(struct Estudiante* estudiante, const char* materia) {
         }
     }
 
-    printf("La materia no esta inscrita.\n");
+    printf("La materia no está inscrita.\n");
 }
 
 struct Estudiante* crearEstudiante(const char* nombre, int edad, float promedio) {
@@ -71,24 +71,42 @@ void mostrarEstudiante(struct Estudiante estudiante) {
     printf("Promedio: %.2f\n", estudiante.promedio);
 
     printf("\nMaterias inscritas:\n");
-    for (int i = 0; i < estudiante.numMaterias; i++) {
-        printf("- %s\n", estudiante.materias[i]);
+    if (estudiante.numMaterias > 0) {
+        for (int i = 0; i < estudiante.numMaterias; i++) {
+            printf("- %s\n", estudiante.materias[i]);
+        }
+    } else {
+        printf("(Ninguna)\n");
     }
 
     printf("\nAsistencias registradas:\n");
-    for (int i = 0; i < estudiante.numAsistencias; i++) {
-        printf("Fecha: %s, Materia: %s, Estado: %s\n", estudiante.asistencias[i].fecha,
-               estudiante.asistencias[i].materia, estudiante.asistencias[i].estado);
+    if (estudiante.numAsistencias > 0) {
+        for (int i = 0; i < estudiante.numAsistencias; i++) {
+            printf("Fecha: %s, Materia: %s, Estado: %s\n", estudiante.asistencias[i].fecha,
+                   estudiante.asistencias[i].materia, estudiante.asistencias[i].estado);
+        }
+    } else {
+        printf("(Ninguna)\n");
     }
 }
 
 int main() {
     struct Estudiante* estudiante1 = crearEstudiante("Rodrigo", 18, 9.5);
     if (estudiante1 != NULL) {
-        // Simulación de una asistencia
+        // Simulación de asistencias
         strcpy(estudiante1->asistencias[estudiante1->numAsistencias].fecha, "2023-12-14");
         strcpy(estudiante1->asistencias[estudiante1->numAsistencias].materia, "Fisica");
         strcpy(estudiante1->asistencias[estudiante1->numAsistencias].estado, "asistió");
+        estudiante1->numAsistencias++;
+
+        strcpy(estudiante1->asistencias[estudiante1->numAsistencias].fecha, "2023-12-14");
+        strcpy(estudiante1->asistencias[estudiante1->numAsistencias].materia, "Programacion");
+        strcpy(estudiante1->asistencias[estudiante1->numAsistencias].estado, "falta");
+        estudiante1->numAsistencias++;
+
+        strcpy(estudiante1->asistencias[estudiante1->numAsistencias].fecha, "2023-12-14");
+        strcpy(estudiante1->asistencias[estudiante1->numAsistencias].materia, "Historia");
+        strcpy(estudiante1->asistencias[estudiante1->numAsistencias].estado, "tardanza");
         estudiante1->numAsistencias++;
 
         mostrarEstudiante(*estudiante1);
