@@ -2,13 +2,28 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <stdexcept>
 
 using namespace std;
+
+class MateriaNoEncontradaException : public exception {
+public:
+    const char* what() const throw() {
+        return "Error: La materia no se encuentra en la lista.";
+    }
+};
+
+class AsistenciaDuplicadaException : public exception {
+public:
+    const char* what() const throw() {
+        return "Error: Ya se registró asistencia para esta fecha y materia.";
+    }
+};
 
 struct Asistencia {
     string fecha;
     string materia;
-    string estado; // "asistio", "falta", "tardanza"
+    string estado; // "asistió", "falta", "tardanza"
 };
 
 struct Estudiante {
@@ -40,10 +55,13 @@ void agregarMateria(Estudiante& estudiante, const string& materia) {
 }
 
 void eliminarMateria(Estudiante& estudiante, const string& materia) {
-    estudiante.materias.erase(remove(estudiante.materias.begin(), estudiante.materias.end(), materia), estudiante.materias.end());
+    estudiante.materias.erase(estudiante.materias.begin());
 }
 
 void registrarAsistencia(Estudiante& estudiante, const string& fecha, const string& materia, const string& estado) {
+    auto duplicado = find_if(estudiante.asistencias.begin(), estudiante.asistencias.end(),
+                             [&fecha, &materia](const Asistencia& a) { return a.fecha == fecha && a.materia == materia; });
+
     Asistencia asistencia;
     asistencia.fecha = fecha;
     asistencia.materia = materia;
@@ -54,21 +72,34 @@ void registrarAsistencia(Estudiante& estudiante, const string& fecha, const stri
 int main() {
     Estudiante estudiante1;
 
-    estudiante1.nombre = "Juan Perez";
-    estudiante1.edad = 20;
-    estudiante1.promedio = 8.5;
+    try {
+        estudiante1.nombre = "Juan Perez";
+        estudiante1.edad = 20;
+        estudiante1.promedio = 8.5;
 
-    agregarMateria(estudiante1, "Latin");
-    agregarMateria(estudiante1, "Programacion");
-    agregarMateria(estudiante1, "Historia");
+        agregarMateria(estudiante1, "Latin");
+        agregarMateria(estudiante1, "Programacion");
+        agregarMateria(estudiante1, "Historia");
 
-    mostrarEstudiante(estudiante1);
+        mostrarEstudiante(estudiante1);
 
-    registrarAsistencia(estudiante1, "2023-12-15", "Latin", "asistio");
-    registrarAsistencia(estudiante1, "2023-12-16", "Programacion", "falta");
-    registrarAsistencia(estudiante1, "2023-12-17", "Historia", "retraso");
+        try {
+            eliminarMateria(estudiante1, "Biologia");
+        } catch (const MateriaNoEncontradaException& e) {
+            cerr << "Error: " << e.what() << endl;
+        }
 
-    mostrarEstudiante(estudiante1);
+        try {
+            registrarAsistencia(estudiante1, "2023-12-17", "Historia", "asistio");
+        } catch (const AsistenciaDuplicadaException& e) {
+            cerr << "Error: " << e.what() << endl;
+        }
+
+        mostrarEstudiante(estudiante1);
+
+    } catch (const exception& e) {
+        cerr << "Error general: " << e.what() << endl;
+    }
 
     return 0;
 }
