@@ -21,7 +21,6 @@ struct Estudiante {
     int numAsistencias;
 };
 
-// Retorno de códigos de error
 int agregarMateria(struct Estudiante* estudiante, const char* materia) {
     if (estudiante->numMaterias < MAX_MATERIAS) {
         strcpy(estudiante->materias[estudiante->numMaterias], materia);
@@ -43,10 +42,9 @@ void eliminarMateria(struct Estudiante* estudiante, const char* materia) {
         }
     }
 
-    printf("La materia no está inscrita.\n");
+    printf("La materia no esta inscrita.\n");
 }
 
-// Punteros nulos
 struct Estudiante* crearEstudiante(const char* nombre, int edad, float promedio) {
     struct Estudiante* estudiante = malloc(sizeof(struct Estudiante));
     if (estudiante != NULL) {
