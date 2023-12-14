@@ -40,8 +40,8 @@ int main() {
     estudiante1.edad = 20;
     estudiante1.promedio = 8.5;
 
-    agregarMateria(estudiante1, "Matemáticas");
-    agregarMateria(estudiante1, "Programación");
+    agregarMateria(estudiante1, "Latin");
+    agregarMateria(estudiante1, "Programacion");
     agregarMateria(estudiante1, "Historia");
 
     mostrarEstudiante(estudiante1);
