@@ -5,11 +5,18 @@
 
 using namespace std;
 
+struct Asistencia {
+    string fecha;
+    string materia;
+    string estado; // "asistio", "falta", "tardanza"
+};
+
 struct Estudiante {
     string nombre;
     int edad;
     float promedio;
     vector<string> materias;
+    vector<Asistencia> asistencias; // Lista de asistencias
 };
 
 void mostrarEstudiante(const Estudiante& estudiante) {
@@ -21,6 +28,11 @@ void mostrarEstudiante(const Estudiante& estudiante) {
     for (const auto& materia : estudiante.materias) {
         cout << "- " << materia << endl;
     }
+
+    cout << "Asistencias registradas:" << endl;
+    for (const auto& asistencia : estudiante.asistencias) {
+        cout << "Fecha: " << asistencia.fecha << ", Materia: " << asistencia.materia << ", Estado: " << asistencia.estado << endl;
+    }
 }
 
 void agregarMateria(Estudiante& estudiante, const string& materia) {
@@ -28,9 +40,15 @@ void agregarMateria(Estudiante& estudiante, const string& materia) {
 }
 
 void eliminarMateria(Estudiante& estudiante, const string& materia) {
-    estudiante.materias.erase(remove_if(estudiante.materias.begin(), estudiante.materias.end(),
-                                        [&materia](const string& mat) { return mat == materia; }),
-                              estudiante.materias.end());
+    estudiante.materias.erase(remove(estudiante.materias.begin(), estudiante.materias.end(), materia), estudiante.materias.end());
+}
+
+void registrarAsistencia(Estudiante& estudiante, const string& fecha, const string& materia, const string& estado) {
+    Asistencia asistencia;
+    asistencia.fecha = fecha;
+    asistencia.materia = materia;
+    asistencia.estado = estado;
+    estudiante.asistencias.push_back(asistencia);
 }
 
 int main() {
@@ -46,7 +64,9 @@ int main() {
 
     mostrarEstudiante(estudiante1);
 
-    eliminarMateria(estudiante1, "Historia");
+    registrarAsistencia(estudiante1, "2023-12-15", "Latin", "asistio");
+    registrarAsistencia(estudiante1, "2023-12-16", "Programacion", "falta");
+    registrarAsistencia(estudiante1, "2023-12-17", "Historia", "retraso");
 
     mostrarEstudiante(estudiante1);
 
